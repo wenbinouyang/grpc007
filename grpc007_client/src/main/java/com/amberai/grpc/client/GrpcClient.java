@@ -28,7 +28,7 @@ public class GrpcClient {
 	}
 
 	public void shutdown() throws InterruptedException {
-		channel.shutdown().awaitTermination(5, TimeUnit.SECONDS);
+		channel.shutdown().awaitTermination(10, TimeUnit.SECONDS);
 	}
 
 	@SuppressWarnings({ "rawtypes" })
@@ -46,9 +46,10 @@ public class GrpcClient {
 			}
 			Method method = client.getClass().getMethod(rpcMethoddName, argsTypes);
 			Object result = method.invoke(client, args);
+			UtilFunctions.log.info("=========== GrpcClient#call end ===========");
 			return result;
 		} catch (Exception e) {
-			UtilFunctions.log.error("GrpcClient#call Exception: {}", e.toString());
+			UtilFunctions.log.error("GrpcClient#call error, msg:{}, exception:{}", e.toString(), e);
 			return null;
 		} finally {
 			if (client != null) {
@@ -68,7 +69,7 @@ public class GrpcClient {
 			UtilFunctions.log.info("GrpcClient#getUserById response, code:{}, data:{}", response.getCode(),
 					response.getData());
 		} catch (StatusRuntimeException e) {
-			UtilFunctions.log.error("GrpcClient#getUserById error, StatusRuntimeException:{}", e);
+			UtilFunctions.log.error("GrpcClient#addBook error, msg:{}, exception:{}", e.toString(), e);
 			return null;
 		}
 		return response;
@@ -83,8 +84,9 @@ public class GrpcClient {
 			response = bookBlockingStub.addBook(request);
 			UtilFunctions.log.info("GrpcClient#addBook response, code:{}, data:{}", response.getCode(),
 					response.getData());
+			UtilFunctions.log.info("=========== GrpcClient#addBook end ===========");
 		} catch (StatusRuntimeException e) {
-			UtilFunctions.log.error("GrpcClient#addBook error, StatusRuntimeException:{}", e);
+			UtilFunctions.log.error("GrpcClient#addBook error, msg:{}, exception:{}", e.toString(), e);
 			return null;
 		}
 		return response;

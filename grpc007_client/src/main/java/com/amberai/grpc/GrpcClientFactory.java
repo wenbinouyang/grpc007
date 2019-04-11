@@ -5,6 +5,7 @@ import org.apache.commons.pool2.PooledObject;
 import org.apache.commons.pool2.impl.DefaultPooledObject;
 
 import com.amberai.grpc.client.GrpcClient;
+import com.amberai.utils.UtilFunctions;
 
 public class GrpcClientFactory extends BasePooledObjectFactory<GrpcClient> {
 
@@ -20,6 +21,7 @@ public class GrpcClientFactory extends BasePooledObjectFactory<GrpcClient> {
 
 	@Override
 	public void destroyObject(PooledObject<GrpcClient> p) throws Exception {
+		UtilFunctions.log.info("==== GrpcClientFactory#destroyObject: destroy grpcClient instance ====");
 		p.getObject().shutdown();
 		super.destroyObject(p);
 	}

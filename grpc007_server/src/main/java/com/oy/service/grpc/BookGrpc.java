@@ -24,7 +24,7 @@ public class BookGrpc extends BookServiceGrpc.BookServiceImplBase {
 		Integer id = request.getId();
 		String name = request.getName();
 		Double price = request.getPrice();
-		Utils.log.info("BookGrpc#addBook, id:{}, name:{}, price:{}", id, name, price);
+		Utils.log.info("BookGrpc#addBook info, id:{}, name:{}, price:{}", id, name, price);
 
 		// 调用service层的方法
 		Book book = new Book();
