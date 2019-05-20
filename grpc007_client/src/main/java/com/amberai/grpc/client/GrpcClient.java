@@ -16,7 +16,7 @@ import io.grpc.ManagedChannelBuilder;
 import io.grpc.StatusRuntimeException;
 
 public class GrpcClient {
-	public static String host = "localhost";
+	//public static String host = "localhost";
 	private final ManagedChannel channel;
 	private final UserServiceGrpc.UserServiceBlockingStub userBlockingStub;
 	private final BookServiceGrpc.BookServiceBlockingStub bookBlockingStub;
